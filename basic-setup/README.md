@@ -20,11 +20,7 @@ Depending on the content of the env file, the entrypoint will also configure dat
 
 ## Running the environment with developer-tools installed in container
 
-Use the following command to deploy:
-
-````shell
-docker-compose -f docker-compose.yml -f docker-compose-development.yml up -d
-````
+Adapt the .env file and set ````ENABLE_DEVELOPER_MODE```` explicitly to yes (it will be "no" per default)
 
 ## Running multiple deployments:
 
@@ -45,9 +41,6 @@ vim .env
 cd ../basic-setup
 bin/stop_containser.sh
 ````
-+ in the end you can run make-mrproper.sh in the new directory
-````
-./make_mrproper.sh
-````
++ in the end you can run ````docker-compose up -d```` again
 
-**NB:** the ````bin/```` directory contains some simple scripts to stop and start the containers. This is usefull if you do not want to destroy your containers (when runnign ````docker-compose down````)v
+**NB:** the ````bin/```` directory contains some simple scripts to stop and start the containers.

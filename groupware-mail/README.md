@@ -69,6 +69,10 @@ Depending on the content of the `.env` file, the entrypoint will also configure
 database access, wait for DB connection to succeed, run schema migrations and
 inject an initial user into the authentication backend.
 
+## Running the environment with developer-tools installed in container
+
+Adapt the .env file and set ````ENABLE_DEVELOPER_MODE```` explicitly to yes (it will be "no" per default)
+
 ## Running multiple deployments:
 
 If you want to use multiple setups at the same time for testing you can follow these steps:
@@ -93,4 +97,4 @@ bin/stop_containser.sh
 ./make_mrproper.sh
 ````
 
-**NB:** the ````bin/```` directory contains some simple scripts to stop and start the containers. This is usefull if you do not want to destroy your containers (when runnign ````docker-compose down````)v
+**NB:** the ````bin/```` directory contains some simple scripts to stop and start the containers. 
