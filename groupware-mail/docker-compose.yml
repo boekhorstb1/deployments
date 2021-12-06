@@ -26,7 +26,7 @@ services:
       - hordenet
 
   dovecot:
-    image: ghcr.io/maintaina/containers/dovecot-horde:latest
+    image: ghcr.io/boekhorstb1/containers/dovecot-horde:latest
     container_name: ${CONTAINER_PREFIX}horde_dovecot
     environment:
       - MYSQL_USER=${MYSQL_HORDE_USER}
@@ -47,7 +47,7 @@ services:
 #    - "143:143"
 
   postfix:
-    image: ghcr.io/maintaina/containers/postfix-horde:latest
+    image: ghcr.io/boekhorstb1/containers/postfix-horde:latest
     container_name: ${CONTAINER_PREFIX}horde_postfix
     environment:
       - MYSQL_USER=${MYSQL_HORDE_USER}
@@ -68,7 +68,7 @@ services:
 #    - "587:587"
 
   horde:
-    image: ghcr.io/maintaina/containers/${HORDE_IMAGE}
+    image: ghcr.io/boekhorstb1/containers/${HORDE_IMAGE}
     container_name: ${CONTAINER_PREFIX}horde_web
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -81,6 +81,7 @@ services:
       - EXPAND_CONFIGS=${EXPAND_CONFIGS}
       - HORDE_MIGRATION_RUNS=${HORDE_MIGRATION_RUNS}
       - GITHUB_COMPOSER_TOKEN=${GITHUB_COMPOSER_TOKEN}
+      - ENABLE_DEVELOPER_MODE=${ENABLE_DEVELOPER_MODE}
     volumes:
       - ./original_config/apps/:/srv/original_config/apps
       ## Uncomment these two to provide your own letsencrypt certs and vhosts file
@@ -91,7 +92,7 @@ services:
       - 80
     ## Comment if you do not want to expose ports directly and rather use a frontend service
     ports:
-      - "80:80"
+      - "8080:80"
     # - "443:443"
     networks:
       - hordenet
