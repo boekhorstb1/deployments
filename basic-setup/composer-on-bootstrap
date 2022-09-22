@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+## prevent running twice
+RANFILE=/tmp/composer-on-bootstrap-hook
+if [[ -f "$RANFILE" ]]; then
+    echo "The $0 hook already ran."
+    exit;
+fi
+
+## checking if git exists
+if ! command -v git &> /dev/null
+then
+    echo "git could not be found, trying to install it now"
+    zypper --no-confirm install --no-recommends git-core || exit 1
+fi
+
+echo "updating with new composer.json"
+cp /srv/deployment/composer.json /srv/www/horde
+
+rm composer.lock
+git config --global --add safe.directory "*"
+composer install || exit 1
+chown -R wwwrun:www /srv/www/horde/web
+
+# Re-Run copy config tool and db migration tool
+/usr/local/bin/copy-original-configs || exit 1
+
+# this is for the sake of ease, otherwise one has to do this manually
+chown -R wwwrun:wwwrun /srv/www/horde/var
+
+echo "creating RANFILE"
+touch $RANFILE
+
+echo "finished composer on bootstrap"

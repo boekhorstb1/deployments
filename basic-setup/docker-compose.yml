@@ -36,7 +36,10 @@ services:
       - ENABLE_DEVELOPER_MODE=${ENABLE_DEVELOPER_MODE}
       - CUSTOM_TOOLS=${CUSTOM_TOOLS}
     volumes:
-      - ./original_config/apps/:/srv/original_config/apps/
+      - ./original_config/apps/:/srv/original_config/apps/:Z
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh:Z
+      - ./horde-deployment/:/srv/deployment:Z
+      - ./composer-on-bootstrap:/usr/local/bin/composer-on-bootstrap:Z
     ports:
       - "80:80"
     networks:
