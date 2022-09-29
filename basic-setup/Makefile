@@ -29,6 +29,6 @@ down: ## Stops and removes the containers
 weblogs: ## creates logs of web container
 	docker logs -f "${PREFIX_CONTAINER}horde_web"
 
-.PHONY: test
-test: ## creates logs of web container
-	echo ${PREFIX_CONTAINER}
+.PHONY: enterweb
+enterweb: ## creates logs of web container
+	docker exec -it "${PREFIX_CONTAINER}horde_web" bash
