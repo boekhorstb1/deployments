@@ -20,8 +20,8 @@ services:
 ## Uncomment to expose database ports
    #ports:
    #  - "3306:3006"
-   #expose:
-   #   - 3306
+    expose:
+      - 3306
     networks:
       - hordenet
 
@@ -93,7 +93,7 @@ services:
    #  - 80
     ## Comment if you do not want to expose ports directly and rather use a frontend service
     ports:
-      - "80:80"
+      - "9080:80"
     # - "443:443"
     networks:
       - hordenet

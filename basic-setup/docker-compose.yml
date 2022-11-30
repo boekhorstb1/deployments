@@ -12,8 +12,8 @@ services:
       - MYSQL_USER=${MYSQL_HORDE_USER}
       - MYSQL_PASSWORD=${MYSQL_HORDE_USER_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_HORDE_DB}
-    ports:
-      - "3306:3006"
+    #ports:
+    #  - "3306:3006"
     expose:
       - 3360
     networks:
@@ -21,6 +21,7 @@ services:
 
   horde:
     image: ghcr.io/maintaina/containers/${HORDE_IMAGE}
+    #image: ghcr.io/boekhorstb1/containers/${HORDE_IMAGE}
     container_name: ${PREFIX_CONTAINER}horde_web
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -41,7 +42,7 @@ services:
       - ./horde-deployment/:/srv/deployment:Z
       - ./composer-on-bootstrap:/usr/local/bin/composer-on-bootstrap:Z
     ports:
-      - "80:80"
+      - "8080:80"
     networks:
       - hordenet
     command: /usr/sbin/apachectl -D FOREGROUND

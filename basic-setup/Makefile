@@ -17,6 +17,10 @@ help: ## Display this help message
 setup: ## Rebuilds and/or sets up de default environment. Variables in .env concerning
 	docker-compose up -d
 
+.PHONY: start
+start: ## Stops the containers
+	docker-compose start
+
 .PHONY: stop
 stop: ## Stops the containers
 	docker-compose stop	
